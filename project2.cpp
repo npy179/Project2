@@ -49,7 +49,7 @@ void Graph::PrintadjMatrix(list<Vetics> adj[V])
 	//construct the adjacency matrix from adjacency
 	
 	Vetics vt;
-	int id;
+	int id;rub
 	for (int i = 0; i < V; i++)
 	{
 		for (list<Vetics>::iterator it=adj[i].begin(); it != adj[i].end();it++)
