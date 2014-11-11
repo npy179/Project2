@@ -8,7 +8,7 @@
 #include <sstream>
 using namespace std;
 
-struct AdjListnode    // creat a adjlist node, include prvious and next, and weight
+/*struct AdjListnode    // creat a adjlist node, include prvious and next, and weight
 {
   int dest;
   double weight;
@@ -18,22 +18,26 @@ struct AdjListnode    // creat a adjlist node, include prvious and next, and wei
 struct AdjList          //creat an adjlist
 {
   struct AdjListnode * header;
-}
-
-
+  };*/
+struct Vetics
+{
+  int id;
+  double weight;
+};
 class Graph
 {
   private:
   int V; // number of vetics in the graph
   int E; // number of edges
-  string filename;//input the filename
-  //  list<Vetics> *adj;// declare a adjency list of graph
+  string filename; //input the filename
+  list<Vetics> adj; // declare a adjency list of graph
+
 
   public:
   Graph(string);//construct fucntion,
   vector<double> ReadGraph(string);
   //  int DetermComp();
-  struct AdjListnode* newAdjListnode(int, double);
+  list<Vetics> creatAdjList(vector<double>);
 };
 
 Graph::Graph(string filename)
@@ -43,7 +47,7 @@ Graph::Graph(string filename)
   this->V = Arr.front();
   //  this->E = Arr
   this->E = Arr.at(1);
-  adj = new list<Vetics>[V];//create V list to hold the Vetics with weight
+  //  adj = new list<Vetics>[V];//create V list to hold the Vetics with weight
 
   int  v = int(V);
  double adjmatrix[v][v];
@@ -61,7 +65,10 @@ Graph::Graph(string filename)
       int posy = Arr.at(3*i)-1;
       adjmatrix[posx][posy] = Arr.at(3*i+1);
     }
- for (int i = 0; i < 10; i++)
+
+  // listadjance
+  list<Vetics> adj =  creatAdjList(Arr);
+  /*for (int i = 0; i < 10; i++)
     {
       for (int j = 0; j < 10; j++)
         {
@@ -72,11 +79,11 @@ Graph::Graph(string filename)
  cout<<"this the one element"<<Arr.at(5);
  for (it = Arr.begin();it != Arr.end();++it)
     {
-      cout<<" "<<*it;
+    cout<<" "<<*it;
     }
   cout<<"-----------------------------------------------------------"<<endl;
   cout<<V<<" "<<E<<endl;
-  cout<<"-----------------------------------------------------------"<<endl;
+  cout<<"-----------------------------------------------------------"<<endl;*/
 }
 
 vector<double> Graph::ReadGraph(string filename)
@@ -125,10 +132,23 @@ vector<double> Graph::ReadGraph(string filename)
 
  }
 
-struct AdjListnode* Graph::newAdjListnode(int dest, double weight)
+list<Vetics> Graph::creatAdjList(vector<double> arr)
 {
-  struct AdjListnode*  newNode =
+  Vetics vt;
+  for (int i = 0; i < V; i++)
+    {
+      int scr = int  arr.at[3*i];
+      vt.id = int arr.at[3*i+1];
+      vt.weight = arr.at[3*i+2];
+      adj[scr].push_back(vt);
+    }
+  return adj;
 }
+
+
+
+
+
  int main()
 {
     string filename = "graph1.txt";
