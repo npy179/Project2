@@ -30,7 +30,7 @@ class Graph
   int V; // number of vetics in the graph
   int E; // number of edges
   string filename; //input the filename
-  list<Vetics> adj; // declare a adjency list of graph
+  list<Vetics> adj[10]; // declare a adjency list of graph
 
 
   public:
@@ -132,17 +132,18 @@ vector<double> Graph::ReadGraph(string filename)
 
  }
 
-list<Vetics> Graph::creatAdjList(vector<double> arr)
+list<Vetics>  Graph::creatAdjList(vector<double> arr)
 {
   Vetics vt;
+  list<Vetics> adj[V];
   for (int i = 0; i < V; i++)
     {
-      int scr = int  arr.at[3*i];
-      vt.id = int arr.at[3*i+1];
-      vt.weight = arr.at[3*i+2];
+      int scr =   arr.at(3*i);
+      vt.id =  arr.at(3*i+1);
+      vt.weight = arr.at(3*i+2);
       adj[scr].push_back(vt);
     }
-  return adj;
+  return * adj;
 }
 
 
